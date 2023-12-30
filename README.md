@@ -28,5 +28,6 @@ Procedure of the test is the following:
 ## Result
 Average hit rate of 0.18 and 0.89 are computed for the content based recommendation system and user based recommendation system respectively.
 
-
+## Source Code
+Open the Jupytor Notebook (https://github.com/ssunami/ConnectFour/blob/main/ConnectFour_Project_Code.ipynb) The Notebook should be loadable in browser. This can also be downloaded locally though requires installing Python and Jupyter.
 
