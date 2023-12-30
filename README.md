@@ -20,14 +20,14 @@ we computed the precision of each recommendation systems, and compare the result
 
 Procedure of the test is the following:
 
-1.Randomly extract the test set (20 percent of whole user preference data)
-2.Compute the hit rate of each user and find the average hit rate
-3.Repeat step 1 and 2 for 5 times and take the average of the hit rate 
-4.Do the above steps for both of the recommendation systems and compare the scores
+1.Randomly extract the test set (20 percent of whole user preference data) \\
+2.Compute the hit rate of each user and find the average hit rate \\
+3.Repeat step 1 and 2 for 5 times and take the average of the hit rate  \\
+4.Do the above steps for both of the recommendation systems and compare the scores\\
 
 ## Result
 Average hit rate of 0.18 and 0.89 are computed for the content based recommendation system and user based recommendation system respectively.
 
 ## Source Code
-Open the Jupytor Notebook (https://github.com/ssunami/ConnectFour/blob/main/ConnectFour_Project_Code.ipynb) The Notebook should be loadable in browser. This can also be downloaded locally though requires installing Python and Jupyter.
+Open the Jupytor Notebook (https://github.com/ssunami/RecommendationSystem/blob/main/Recommendation_System_Project.ipynb) The Notebook should be loadable in browser. This can also be downloaded locally though requires installing Python and Jupyter.
 
