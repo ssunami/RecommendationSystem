@@ -24,7 +24,7 @@ We used the following 2 data sets, both of them are from Toshihiro Kamishima’s
 5. minor group 0:aomono (blue-skinned fish) 1:akami (red meat fish) 2:shiromi (white-meat fish) 3:tare (something like baste; for eel or sea eel) 4:clam or shell 5:squid or octopus 6:shrimp or crab 7:roe 8:other seafood 9:egg 10:meat other than fish 11:vegetables 
 6. the heaviness/oiliness in taste, range[0-4] 0:heavy/oily 
 7. how frequently the user eats the SUSHI, range[0-3] 3:frequently eat 
-8. normalized price \\
+8. normalized price 
 9. how frequently the SUSHI is sold in sushi shop, range[0-1] 1:the most frequently 
 
 We call this data set as sushi characteristics data.
@@ -38,6 +38,10 @@ We call this data set as sushi characteristics data.
 
 We call this data set as user preferences data.
 
+## Data Pre-processing
+As mentioned in the previous section, sushi3b.5000.10.score holds evaluation values 0 to 4 with -1 indicating no evaluation. We modified it by adding 1 to each evaluated score and replacing -1 with 0. We also decided to use only ”price”, ”minor group”, and ”heaviness” among the characteristics features, since those
+are the main factors that the customers decide on which sushi to order. We then normalized continuous variables, ”price” and ”heaviness”, and converted the categorical variable ”minor group” into a numerical format using one-hot encoding.
+
 ##  Content Based Recommendation System
 The content based recommendation system recommends sushi to the user based on his/her preferences of characteristics of sushi. It takes user id, user preferences data, normalized sushi characteristics data, and number of sushi recommending and returns the top 5 recommended sushi for the user. The number of recommendations is set to 5 as default. It first computes the dot product of user preferences data and normalized sushi characteristics data, which results in creating what each user prefers for each sushi characteristics. We name this user profile data. Then, we compute the cosine similarity between user profile data and sushi characteristics data, which makes it possible to define how close each sushi is to the user's preference. Finally, the function returns with sushi having top 5 highest similarity scores for the designated user. Note that if the designated use id does not exist in the user preferences data, the recommender returns top 5 highest rated sushi.
 
@@ -45,14 +49,14 @@ The content based recommendation system recommends sushi to the user based on hi
 The user based recommendation system recommends sushi based on the preferences of the users who are close to the target users. It takes user id, user preferences data, and number of sushi recommending and returns the top 5 recommended sushi for the user. The number of recommendations is set to 5 as default. It first computes the similarity scores between all users by taking cosine similarity of user preference data. It then finds 5 of the most similar users to the target user and extract their sushi preference data. Their sushi preference data is weighted based on the similarity score to calculate "recommendation scores" for each sushi. It then returns to the sushi having the top 5 highest recommendation scores.
 
 ## Evaluation
-we computed the precision of each recommendation systems, and compare the result. How we assess the precision of the recommendation systems is computing the hit rate for the each systems and compare. Hit rate is the fraction of rated sushi by the user among the recommended sushi by the system. However, since the score of 1 indicates "dislike" in this data set, I determined the hit rate as the fraction of rated sushi with the score of 2 or above by the user among the recommended sushi by the system.
+We computed the precision of each recommendation systems, and compare the result. How we assess the precision of the recommendation systems is computing the hit rate for the each systems and compare. Hit rate is the fraction of rated sushi by the user among the recommended sushi by the system. However, since the score of 1 indicates "dislike" in this data set, We determined the hit rate as the fraction of rated sushi with the score of 2 or above by the user among the recommended sushi by the system.
 
 Procedure of the test is the following:
 
-1.Randomly extract the test set (20 percent of whole user preference data) \\
-2.Compute the hit rate of each user and find the average hit rate \\
-3.Repeat step 1 and 2 for 5 times and take the average of the hit rate  \\
-4.Do the above steps for both of the recommendation systems and compare the scores\\
+1. Randomly extract the test set (20 percent of whole user preference data) 
+2. Compute the hit rate of each user and find the average hit rate 
+3. Repeat step 1 and 2 for 5 times and take the average of the hit rate  
+4. Do the above steps for both of the recommendation systems and compare the scores
 
 ## Result
 Average hit rate of 0.18 and 0.89 are computed for the content based recommendation system and user based recommendation system respectively.
